@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
-    "summary": "FileReader",
-    "repository": "https://github.com/USER/PROJECT.git",
+    "summary": "Elm implementation of HTML5 Reader API",
+    "repository": "https://github.com/simonh1000/file-reader",
     "license": "BSD3",
     "source-directories": [
         "src"
