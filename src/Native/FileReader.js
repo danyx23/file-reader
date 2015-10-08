@@ -16,7 +16,7 @@ Elm.Native.FileReader.make = function(localRuntime){
     var node = window;
 
     // path : Signal String
-    // var path = NS.input('History.path', window.location.pathname);
+    var content = NS.input('FileReader.content', "");
 
     // setPath : String -> Task error ()
     var getFileContents = function(id){
@@ -25,7 +25,7 @@ Elm.Native.FileReader.make = function(localRuntime){
 
             reader.onload = function(evt) {
                 console.log(evt.target.result);
-                localRuntime.notify(evt.target.result);
+                localRuntime.notify(content.id, evt.target.result);
             };
 
             var fileUpload = document.getElementById(id).files[0];
