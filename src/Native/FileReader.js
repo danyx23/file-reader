@@ -10,33 +10,29 @@ Elm.Native.FileReader.make = function(localRuntime){
         return localRuntime.Native.FileReader.values;
     }
 
-    var NS = Elm.Native.Signal.make(localRuntime);
     var Task = Elm.Native.Task.make(localRuntime);
-    var Utils = Elm.Native.Utils.make(localRuntime);
-    var node = window;
 
-    // path : Signal String
-    var content = NS.input('FileReader.content', "");
-
-    // setPath : String -> Task error ()
-    var getFileContents = function(id){
+    // getFileContents : String -> Task error String
+    var getTextFile = function(id){
         return Task.asyncFunction(function(callback){
             var reader = new FileReader();
 
             reader.onload = function(evt) {
-                console.log(evt.target.result);
-                localRuntime.notify(content.id, evt.target.result);
+                return callback(Task.succeed(evt.target.result))
+            };
+
+            reader.onerror = function() {
+                return callback(Task.fail({ctor : 'read_fail'}));
             };
 
             var fileUpload = document.getElementById(id).files[0];
-            reader.readAsText(fileUpload);
-
-            return callback(Task.succeed(Utils.Tuple0));
+            if (fileUpload)
+                reader.readAsText(fileUpload);
+            else callback(Task.fail({ctor : 'no_file_specified'}));
         });
     };
 
     return {
-        getFileContents : getFileContents
+        getTextFile : getTextFile
     };
-
 };
