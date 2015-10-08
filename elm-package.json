@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "summary": "Elm implementation of HTML5 Reader API",
+    "summary": "Elm bindings for HTML5 Reader API",
     "repository": "https://github.com/simonh1000/file-reader",
     "license": "BSD3",
     "source-directories": [
